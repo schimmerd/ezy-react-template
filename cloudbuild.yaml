@@ -1,0 +1,22 @@
+steps:
+  # build the container image
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "eu.gcr.io/$PROJECT_ID/$APP_NAME", "."]
+    # push the container image to Container Registry
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "eu.gcr.io/$PROJECT_ID/$APP_NAME"]
+    # Deploy container image to Cloud Run
+  - name: "gcr.io/cloud-builders/gcloud"
+    args:
+      [
+        "run", "deploy", "$APP_NAME",
+        "--image", "eu.gcr.io/$PROJECT_ID/$APP_NAME",
+        "--region", "europe-west1",
+        "--platform", "managed",
+        "--project", "$PROJECT_ID",
+        "--concurrency", "10",
+        "--allow-unauthenticated",
+        "--memory", "2Gi"
+      ]
+images:
+- eu.gcr.io/$PROJECT_ID/$APP_NAME
