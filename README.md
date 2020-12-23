@@ -134,5 +134,5 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 <hr />
 
-MMS-Analytics - Dominik Schimmer - 07.07.2020
+Dominik Schimmer - 07.07.2020
 
